@@ -63,37 +63,67 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
+int cmp_int(const void* e1, const void* e2)
+{
+	return (*(int*)e1 - *(int*)e2);
+}
+
+int Del(int arr[], int k, int i)
+{
+	int j = 0;
+	for (j = k - 1; j < i - 1; j++)
+	{
+		arr[j] = arr[j + 1];
+	}
+	
+	return --i;
+}
+
 int main()
 {
-	printf("1");
 	int n = 0;
 	scanf("%d", &n);
-	int i = 0;
-	int j = 2;
-	int k = 0;
-	int tmp = 0;
-	int arr[700] = { 0 };
+	printf("1");
+
+	int i = 1;// i 是未被赋值的首元素的下标
+	int j = 1;// j 是当前阶段元素个数（每阶段元素都是下一阶段元素数目的二倍）
+	int k = 0;// k 是循环变量
+	int m = 0;
+	int arr[1024] = { 0 };
 	arr[0] = 1;
 
-	while (i < 700)
+	// 生成集合M
+	while (i < 512)
 	{
-		tmp = i;
-		for (k = 0; k < j / 2; k++)
+		// 先整出来，之后再排序
+	    for (k = 0; k < j; k++)
 		{
-			arr[i++] = 2 * arr[tmp] + 1;
-		}
-		for (; k < j; k++)
-		{
-			arr[i++] = 3 * arr[tmp] + 1;
+			arr[i++] = 2 * arr[m] + 1;
+			arr[i++] = 3 * arr[m++] + 1;
 		}
 		j *= 2;
 	}
 
-	
-	for (i = 1; i < n; i++)
+	// 排序
+	qsort(arr, i, sizeof(arr[0]), cmp_int);
+
+	// 删去重复元素
+	for (k = 1; k < i; k++)
+	{
+		if (arr[k] == arr[k - 1])
+		{
+			i = Del(arr, k, i);
+		}
+	}
+
+	// 打印
+	for (i = 1; i < n; i++)// 第一个已经打印了
 	{
 		printf(" %d", arr[i]);
 	}
 
 	return 0;
 }
+
+
