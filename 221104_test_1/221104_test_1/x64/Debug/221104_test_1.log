@@ -1,0 +1,4 @@
+﻿  test.c
+D:\CODE\semester1\221104_test_1\221104_test_1\test.c(21,2): error C2143: 语法错误: 缺少“;”(在“return”的前面)
+D:\CODE\semester1\221104_test_1\221104_test_1\test.c(10,18): error C2075: "hum": 初始化需要带括号的初始化表达式列表
+D:\CODE\semester1\221104_test_1\221104_test_1\test.c(11,18): error C2075: "num": 初始化需要带括号的初始化表达式列表
